@@ -29,7 +29,9 @@ def generateArrayOfPartialSquares(sizeOfSquare):
     testArray = [fullyDefinedSquares] + [set()] * numberOfElements
 
     for i in range(len(testArray)-1):
+        print(i)
         for square in testArray[i].copy():
+            print('here ', i)
             for row in range(len(square)):
                 for col in range(len(square)):
                     newSquare = square[:]
@@ -230,30 +232,34 @@ def generateNAlgebraSizeThreePartials():
     return generatedNAlgebras
 
 
+def generateNAlgebraSizeFourPartials():
+    # -----------------------------------------------------------------------------------
+    # SIZE 4
+    # -----------------------------------------------------------------------------------
+    listOfTribracketCubesSizeFour = generateValidTribracketLatinCubes(4)
+    file = open("Partials/partialSquaresSize4", "rb")
+    listOfLatinSquaresSizeFour = np.load(file, allow_pickle=True)
+    listOfLatinSquaresSizeFour = listOfLatinSquaresSizeFour.tolist()
+
+    generatedNAlgebras = []
+    for tribracket in listOfTribracketCubesSizeFour:
+        for square in listOfLatinSquaresSizeFour:
+            if(isNAlgebraTest(tribracket, square)):
+                generatedNAlgebras.append([tribracket, square])
+
+    return generatedNAlgebras
+
+
 if __name__ == "__main__":
-    generatedNAlgebras = generateNAlgebraSizeThreePartials()
-    # generatedNAlgebras2 = generateVirtualNAlgebrasSizeThreePartials()
-    print(len(generatedNAlgebras))
-    # print(len(generatedNAlgebras2))
-    for virtualPartial in generatedNAlgebras:
-        for square in virtualPartial[-1]:
-            print(square)
-        print()
+    arrayOfPartialSquaresSizeFour = generateArrayOfPartialSquares(4)
+    partialsSizeFour = np.array(arrayOfPartialSquaresSizeFour, dtype=object)
+    file = open("Partials/partialSquaresSize4", "wb")
+    np.save(file, partialsSizeFour)
+    file.close
 
-        # for item in virtualPartial:
-        #     print(item)
-    print()
-    # print(generatedNAlgebras2)
-    # print(generatedNAlgebras)
-
-    # for i in generatedNAlgebras:
-    #     print(i)
-
-    partialSquaresSize3 = generateArrayOfPartialSquares(3)
-    print(len(partialSquaresSize3))
-
-    # array = [[1, -1, 3],[2, 3, 1],[3, 1, 2]]
-    # array = np.array(array)
-
-    # array = (array-1).tolist()
-    # print(array)
+    arrayOfNAlgebraSizeFourPartial = generateNAlgebraSizeFourPartials()
+    partialsNAlgebrasSizeFour = np.array(
+        arrayOfNAlgebraSizeFourPartial, dtype=object)
+    file = open("Partials/partialNAlgebrasSize4", "wb")
+    np.save(file, partialsNAlgebrasSizeFour)
+    file.close
