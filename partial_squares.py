@@ -1,6 +1,6 @@
 import numpy as np
 from latin_squares import generateArrayOfLatinSquares
-from tribracket import generateValidTribracketLatinCubes
+from tribracket import generateValidTribracketLatinCubes, isValidTribracket
 from virtual_tribracket import isValidVirtualNAlgebraTribracket, isVirtualTribracketTest
 
 
@@ -29,9 +29,7 @@ def generateArrayOfPartialSquares(sizeOfSquare):
     testArray = [fullyDefinedSquares] + [set()] * numberOfElements
 
     for i in range(len(testArray)-1):
-        print(i)
         for square in testArray[i].copy():
-            print('here ', i)
             for row in range(len(square)):
                 for col in range(len(square)):
                     newSquare = square[:]
@@ -232,14 +230,47 @@ def generateNAlgebraSizeThreePartials():
     return generatedNAlgebras
 
 
-def generateNAlgebraSizeFourPartials():
+# def generateNAlgebraSizeFourPartials():
+#     # -----------------------------------------------------------------------------------
+#     # SIZE 4
+#     # -----------------------------------------------------------------------------------
+#     listOfTribracketCubesSizeFour = generateValidTribracketLatinCubes(4)
+#     file = open("Partials/partialSquaresSize4", "rb")
+#     listOfLatinSquaresSizeFour = np.load(file, allow_pickle=True)
+#     listOfLatinSquaresSizeFour = listOfLatinSquaresSizeFour.tolist()
+
+#     generatedNAlgebras = []
+#     for tribracket in listOfTribracketCubesSizeFour:
+#         for square in listOfLatinSquaresSizeFour:
+#             if(isNAlgebraTest(tribracket, square)):
+#                 generatedNAlgebras.append([tribracket, square])
+
+#     return generatedNAlgebras
+
+
+def getTribracketsSizeFour():
+    file = open("LatinCubes/latinCubesSize4", "rb")
+    cubesSize4 = np.load(file, allow_pickle=True)
+    listOfLatinCubesSizeFour = cubesSize4.tolist()
+    tribrackets = []
+    for cube in listOfLatinCubesSizeFour:
+        if isValidTribracket(cube):
+            tribrackets.append(cube)
+    return tribrackets
+
+
+def generateNAlgebrasSizeFourPartials():
     # -----------------------------------------------------------------------------------
     # SIZE 4
     # -----------------------------------------------------------------------------------
-    listOfTribracketCubesSizeFour = generateValidTribracketLatinCubes(4)
+    listOfTribracketCubesSizeFour = getTribracketsSizeFour()
+    print("Amount of tribrackets size four:",
+          len(listOfTribracketCubesSizeFour))
     file = open("Partials/partialSquaresSize4", "rb")
-    listOfLatinSquaresSizeFour = np.load(file, allow_pickle=True)
-    listOfLatinSquaresSizeFour = listOfLatinSquaresSizeFour.tolist()
+    partialSquaresSize4 = np.load(file, allow_pickle=True)
+    listOfLatinSquaresSizeFour = partialSquaresSize4.tolist()
+    print("Amount of Latin Squares size four:",
+          len(listOfLatinSquaresSizeFour))
 
     generatedNAlgebras = []
     for tribracket in listOfTribracketCubesSizeFour:
@@ -251,15 +282,10 @@ def generateNAlgebraSizeFourPartials():
 
 
 if __name__ == "__main__":
-    arrayOfPartialSquaresSizeFour = generateArrayOfPartialSquares(4)
-    partialsSizeFour = np.array(arrayOfPartialSquaresSizeFour, dtype=object)
-    file = open("Partials/partialSquaresSize4", "wb")
-    np.save(file, partialsSizeFour)
-    file.close
 
-    arrayOfNAlgebraSizeFourPartial = generateNAlgebraSizeFourPartials()
-    partialsNAlgebrasSizeFour = np.array(
-        arrayOfNAlgebraSizeFourPartial, dtype=object)
-    file = open("Partials/partialNAlgebrasSize4", "wb")
-    np.save(file, partialsNAlgebrasSizeFour)
+    NAlgebrasSizeFour = generateNAlgebrasSizeFourPartials()
+
+    arrayOfNAlgebrasSizeFour = np.array(NAlgebrasSizeFour, dtype=object)
+    file = open("Tribrackets/NAlgebrasSizeFour", "wb")
+    np.save(file, arrayOfNAlgebrasSizeFour)
     file.close
