@@ -6,12 +6,12 @@ from tribracket import generateValidTribracketLatinCubes, isValidTribracket
 
 '''
 
-This class, isVirtualTribracketTest(cube, secondCube) takes in two parameters: one cube and another cube. 
+This class, isVirtualTribracketTest(cube, secondCube) takes in two parameters: one cube and another cube.
 These cubes looks like this:    [1 2 3]   [2 3 1]   [3 1 2]
-                                [3 1 2]   [1 2 3]   [2 3 1]       
+                                [3 1 2]   [1 2 3]   [2 3 1]
                                 [2 3 1]   [3 1 2]   [1 2 3]
 
-This class returns either True or False. True if both cubes are compatable to be a Virtual Tribracket. 
+This class returns either True or False. True if both cubes are compatable to be a Virtual Tribracket.
 
 '''
 
@@ -23,17 +23,17 @@ def isVirtualTribracketTest(cube, secondCube):
     Index begins at 0 so if I were to access the third element in the array, [5, 6, 7]    I would code: array[2] and if I accidently typed array[3] I would-
                                                                               ^  ^  ^  ^               -get an error since the max index is 2 in this array.
                                                                               0  1  2  3
-    eg. 
+    eg.
 
         [1 2 3]   [2 3 1]   [3 1 2]
-        [3 1 2]   [1 2 3]   [2 3 1]       
+        [3 1 2]   [1 2 3]   [2 3 1]
         [2 3 1]   [3 1 2]   [1 2 3]
 
                     |
                     v
 
         [0 1 2]   [1 2 0]   [2 0 1]
-        [2 0 1]   [0 1 2]   [1 2 0]   
+        [2 0 1]   [0 1 2]   [1 2 0]
         [1 2 0]   [2 0 1]   [0 1 2]
 
     '''
@@ -48,10 +48,10 @@ def isVirtualTribracketTest(cube, secondCube):
     secondCube = (secondCube - 1).tolist()
 
     '''
-    
+
     Now that both cubes are indexable with values 0 - 2, we now go through all possible combinations of a, b, c, and d
     So  e.g   a b c d    since len(rowLength) = 3     -------------
-              0 0 0 0                                 |  [0 1 2]  |   [1 2 0]   [2 0 1]                   [0 1 2] <----                        
+              0 0 0 0                                 |  [0 1 2]  |   [1 2 0]   [2 0 1]                   [0 1 2] <----
               0 0 0 1                      cube[0] =  |  [2 0 1]  |   [0 1 2]   [1 2 0]     cube[0][0] =  [2 0 1]        len(cube[0][0]) = 3 since [0 1 2]
               0 0 0 2                                 |  [1 2 0]  |   [2 0 1]   [0 1 2]                   [1 2 0]                            has three elements
                                                       -------------
@@ -106,12 +106,12 @@ def isVirtualTribracketTest(cube, secondCube):
 
 '''
 
-This class, isNAlgebraTest(cube, square), takes in two parameters: the first cube and a square. 
-The cube looks like this:       [1 2 3]   [2 3 1]   [3 1 2]     and square like this:     [1 2 3] 
+This class, isNAlgebraTest(cube, square), takes in two parameters: the first cube and a square.
+The cube looks like this:       [1 2 3]   [2 3 1]   [3 1 2]     and square like this:     [1 2 3]
                                 [3 1 2]   [1 2 3]   [2 3 1]                               [3 1 2]
-                                [2 3 1]   [3 1 2]   [1 2 3]                               [2 3 1]           
+                                [2 3 1]   [3 1 2]   [1 2 3]                               [2 3 1]
 
-This class returns either True or False. True if the cube and square are compatable to be an Niebrzydowski Algebra. 
+This class returns either True or False. True if the cube and square are compatable to be an Niebrzydowski Algebra.
 
 '''
 falseArray = [0, 0, 0, 0, 0]
@@ -207,12 +207,12 @@ def isNAlgebraTest(cube, square):
 
 '''
 
-This class, isVirtualNAlgebraTest(secondCube, square), takes in two parameters: the second cube and a square. 
-The cube looks like this:       [1 2 3]   [2 3 1]   [3 1 2]     and square like this:     [1 2 3] 
+This class, isVirtualNAlgebraTest(secondCube, square), takes in two parameters: the second cube and a square.
+The cube looks like this:       [1 2 3]   [2 3 1]   [3 1 2]     and square like this:     [1 2 3]
                                 [3 1 2]   [1 2 3]   [2 3 1]                               [3 1 2]
-                                [2 3 1]   [3 1 2]   [1 2 3]                               [2 3 1]           
+                                [2 3 1]   [3 1 2]   [1 2 3]                               [2 3 1]
 
-This class returns either True or False. True if the second cube and square are compatable to be an Virtual Niebrzydowski Algebra. 
+This class returns either True or False. True if the second cube and square are compatable to be an Virtual Niebrzydowski Algebra.
 
 '''
 
@@ -267,7 +267,7 @@ def isValidVirtualNAlgebraTribracket(cube, secondCube, square):
     # If the first cube and the square are incompatable to be a Niebrzydowski Algebra then it returns False
     if not isNAlgebraTest(cube, square):
         return False
-    # If the second cube and teh square are incompatable to be a Virtual Niebrzydowski Algebra then it returns False
+    # If the second cube and the square are incompatable to be a Virtual Niebrzydowski Algebra then it returns False
     if not isVirtualNAlgebraTest(secondCube, square):
         return False
 
@@ -277,7 +277,7 @@ def isValidVirtualNAlgebraTribracket(cube, secondCube, square):
 
 '''
 
-This function generates valid Tribrackets size n from latin squares. 
+This function generates valid Tribrackets size n from latin squares.
 
 '''
 
@@ -441,9 +441,9 @@ def generateVirtualNAlgebrasSizeThree():
 
 '''
 
-generateVirtualTribracketSizeThree() only generates the valid combinations of any two given cubes. 
+generateVirtualTribracketSizeThree() only generates the valid combinations of any two given cubes.
 It first generates an array of Tribracket Latin Cubes size three and goes through each combination.
-If a given combination works then the pair is added to an array. 
+If a given combination works then the pair is added to an array.
 
 Returns an array of Virtual Tribrackets Size 3
 
@@ -454,26 +454,26 @@ def generateVirtualTribracketSizeThree():
     # -----------------------------------------------------------------------------------
     # SIZE 3
     # -----------------------------------------------------------------------------------
-    #  listOfTribracketCubesSizeThree = generateValidTribracketLatinCubes(3)
+    listOfTribracketCubesSizeThree = generateValidTribracketLatinCubes(3)
 
-    #  generatedNAlgebras = []
-    #  for tribracket in listOfTribracketCubesSizeThree:
-    #     for secondTribracket in listOfTribracketCubesSizeThree:
-    #         if(isVirtualTribracketTest(tribracket, secondTribracket)):
-    #             generatedNAlgebras.append([tribracket, secondTribracket])
+    generatedNAlgebras = []
+    for tribracket in listOfTribracketCubesSizeThree:
+        for secondTribracket in listOfTribracketCubesSizeThree:
+            if(isVirtualTribracketTest(tribracket, secondTribracket)):
+                generatedNAlgebras.append([tribracket, secondTribracket])
 
     # -----------------------------------------------------------------------------------
     # SIZE 4
     # -----------------------------------------------------------------------------------
-    file = open("Tribrackets/tribracketCubesSizeFour", "rb")
-    arrayOfTribracketsSize4 = np.load(file, allow_pickle=True)
-    arrayOfTribracketsSize4 = arrayOfTribracketsSize4.tolist()
+    # file = open("Tribrackets/TribracketsSizeFour", "rb")
+    # arrayOfTribracketsSize4 = np.load(file, allow_pickle=True)
+    # arrayOfTribracketsSize4 = arrayOfTribracketsSize4.tolist()
 
-    generatedNAlgebras = []
-    for tribracket in arrayOfTribracketsSize4:
-        for secondTribracket in arrayOfTribracketsSize4:
-            if(isVirtualTribracketTest(tribracket, secondTribracket)):
-                generatedNAlgebras.append([tribracket, secondTribracket])
+    # generatedNAlgebras = []
+    # for tribracket in arrayOfTribracketsSize4:
+    #     for secondTribracket in arrayOfTribracketsSize4:
+    #         if(isVirtualTribracketTest(tribracket, secondTribracket)):
+    #             generatedNAlgebras.append([tribracket, secondTribracket])
 
     return generatedNAlgebras
 
@@ -527,7 +527,9 @@ if __name__ == "__main__":
     # virtualNAlgebras = generateVirtualNAlgebrasSizeThree()
 
     # THIS ---
-    NAlgebras = generateNAlgebraSizeThree()
+    # NAlgebras = generateNAlgebraSizeThree()
+
+    print(len(generateVirtualTribracketSizeThree()))
 
     # virtualTribrackets = generateVirtualTribracketSizeThree()
     # print(len(virtualTribrackets))
@@ -540,10 +542,10 @@ if __name__ == "__main__":
 
     # print(len(virtualNAlgebras))
 
-    for pair in NAlgebras:
-        for thing in pair:
-            print(thing)
-        print()
+    # for pair in NAlgebras:
+    #     for thing in pair:
+    #         print(thing)
+    #     print()
 
     # THESE -----
     # print(len(NAlgebras))

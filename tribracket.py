@@ -234,10 +234,12 @@ def getArrayOfVirtualNAlgebrasSizeThree():
 
 
 if __name__ == "__main__":
-    # print(len(getArrayOfTribracketsSizeN(4)))
+    print(len(getArrayOfTribracketsSizeN(4)))
     # size4TribracketsArray = generateValidTribracketLatinCubes(4)
 
-    print(getArrayOfVirtualNAlgebrasSizeThree())
+    # print(getArrayOfVirtualNAlgebrasSizeThree())
+    # print(len(generateValidTribracketLatinCubes(2)))
+    # print(generateValidTribracketLatinCubes(3))
 
     # backupArraySize4 = np.array(size4TribracketsArray, dtype=object)
     # file = open("Backups/tribracketsSizeFour", "wb")
