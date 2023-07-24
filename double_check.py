@@ -1,7 +1,16 @@
 import numpy as np
 from tribracket import isValidTribracket
-# from partial_squares import getTribracketsSizeFour
 from virtual_tribracket import isVirtualTribracketTest
+
+"""
+
+This file is to double check our computations by redoing logic
+without referring to the original file (partial_squares.py).
+
+Here we also tried new implementations of the logic for the newest
+axioms to confirm functionality. 
+
+"""
 
 
 def isValidPartialNAlgebra(cube, square):
@@ -161,35 +170,16 @@ def testGenerateVirtualNAlgebraPartialsSizeFourGivenNAlgebras():
         if cube not in validNAlgebraCubes:
             validNAlgebraCubes.append(cube)
 
-    NAlgebraCount = 0
-    VirtualCount = 0
-
     listOfTribracketCubesSizeFour = getTribracketsSizeFour()
     generatedVirtualNAlgebras = []
     for NAlgebraTribracket in validNAlgebraCubes:
         for secondTribracket in listOfTribracketCubesSizeFour:
             for square in validNAlgebraSquares:
-                # if (isValidPartialNAlgebra(NAlgebraTribracket, square)):
-                #     NAlgebraCount += 1
-                # if (isValidVirtualNAlgebraPartial(secondTribracket, square)):
-                #     VirtualCount += 1
                 if(isValidVirtualNAlgebraPartial(secondTribracket, square) and isValidPartialNAlgebra(NAlgebraTribracket, square) and isVirtualTribracketTest(NAlgebraTribracket, secondTribracket)):
                     generatedVirtualNAlgebras.append(
                         [NAlgebraTribracket, secondTribracket, square])
-    print("NAlgebra Count:", NAlgebraCount)
-    print("Virtual Count:", VirtualCount)
     return generatedVirtualNAlgebras
 
 
 if __name__ == "__main__":
-    virtualNAlgebraPartialsSizeFour = testGenerateVirtualNAlgebraPartialsSizeFourGivenNAlgebras()
-    print("--------------------------------------")
-    count = 0
-    for pair in virtualNAlgebraPartialsSizeFour:
-        if pair[-1] != [[1000, 1000, 1000, 1000], [1000, 1000, 1000, 1000], [1000, 1000, 1000, 1000], [1000, 1000, 1000, 1000]]:
-            count += 1
-            for val in pair:
-                print(val)
-    print("Amount of Virtual NAlgebras Size Four",
-          len(virtualNAlgebraPartialsSizeFour))
-    print("Count of defined squares", count)
+    print("Use functions here")

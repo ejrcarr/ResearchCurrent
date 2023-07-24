@@ -1,5 +1,20 @@
 from latin_squares import *
 
+"""
+
+
+This file is to store the functions relating to latin cubes including testing 
+and generation.
+
+To generate latin cubes, use the function: generateArrayOfLatinCubes(sizeOfSquare)
+Replacing the parameter with the integer amount of the desired size of latin cubes
+you want to generate.
+
+e.g. 
+    arrayOfLatinCubesSizeThree = generateArrayOfLatinCubes(3)
+
+"""
+
 
 def isValidLatinCube(cube):
     sizeOfCube = len(cube)

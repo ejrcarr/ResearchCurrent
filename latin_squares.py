@@ -1,6 +1,21 @@
 import itertools
 import numpy as np
 
+"""
+
+This file is to store the functions relating to latin_squares containing
+tests to check if a square is latin, if a row is latin, and to generate
+latin squares.
+
+To generate latin squares, use the function: generateArrayOfLatinSquares(sizeOfSquare)
+Replacing the parameter with the integer amount of the desired size of latin square
+you want to generate.
+
+e.g. 
+    arrayOfLatinSquaresSizeThree = generateArrayOfLatinSquares(3)
+
+"""
+
 
 def isValidRow(square):
     for row in square:

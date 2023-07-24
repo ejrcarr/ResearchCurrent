@@ -105,7 +105,6 @@ def isValidPartialCube(cube):
             for square in range(len(cube)-2):
                 if cube[square][row][column] == cube[square+1][row][column]:
                     return False
-
     return True
 
 
@@ -120,7 +119,6 @@ def generateValidTribracketLatinCubes(sizeOfCube):
 
     validSquares = generateArrayOfLatinSquares(sizeOfCube)
     generatedLatinCubes = []  # really tribrackets
-    generatedCubes = []
 
     defaultCube = [[[0 for i in range(sizeOfCube)] for i in range(
         sizeOfCube)] for i in range(sizeOfCube)]
@@ -132,7 +130,6 @@ def generateValidTribracketLatinCubes(sizeOfCube):
     MAX = len(validSquares)
     p = 0
     while dynamicArray[n] == 0:
-        # print(dynamicArray[n-1]) #print to console progress
         if(len(dynamicArray[:n]) == len(set(dynamicArray[:n]))):
             for i in range(sizeOfCube-1):
                 currentLatinCube[i] = validSquares[dynamicArray[i]]
@@ -150,9 +147,6 @@ def generateValidTribracketLatinCubes(sizeOfCube):
                     newRow = []
                 currentLatinCube[sizeOfCube - 1] = newSquare[:]
 
-            # print(currentLatinCube)
-                if(isValidLatinCube(currentLatinCube)):
-                    generatedCubes.append(currentLatinCube)
                 if(isValidTribracket(currentLatinCube)):
                     generatedLatinCubes.append(currentLatinCube)
                 currentLatinCube = defaultCube[:]
@@ -165,16 +159,6 @@ def generateValidTribracketLatinCubes(sizeOfCube):
             dynamicArray[p] += 1
             if dynamicArray[p] != MAX:
                 p = 0
-
-    # tribracketArray = np.array(generatedLatinCubes, dtype=object)
-    # file = open("Tribrackets/tribracketCubesSizeFour", "wb")
-    # np.save(file, tribracketArray)
-    # file.close
-
-    # cubeArray = np.array(generatedCubes, dtype=object)
-    # file = open("LatinCubes/latinCubesSize4", "wb")
-    # np.save(file, cubeArray)
-    # file.close
 
     return generatedLatinCubes
 
@@ -194,21 +178,12 @@ def generateNAlgebrasSizeThree():
     return generatedNAlgebras
 
 
-def generateNAlgebrasSizeFour():
-    from ast import literal_eval
-    with open('LatinCubes/latinCubesSize4.txt') as f:
-        arrayOfLatinCubesSizeFour = literal_eval(f.read())
-    listOfLatinSquaresSizeFour = generateArrayOfLatinSquares(4)
+"""
 
-    generatedNAlgebras = []
-    for tribracket in arrayOfLatinCubesSizeFour:
-        for secondTribracket in arrayOfLatinCubesSizeFour:
-            # for square in listOfLatinSquaresSizeFour:
-            if(isValidVirtualNAlgebra(tribracket, secondTribracket, 0)):
-                print("ADDED")
-                generatedNAlgebras.append([tribracket, secondTribracket, 0])
+These functions allow to read in files only on local storage
+so calling these functions will give an error.
 
-    return generatedNAlgebras
+"""
 
 
 def getArrayOfTribracketsSizeN(size):
@@ -234,21 +209,4 @@ def getArrayOfVirtualNAlgebrasSizeThree():
 
 
 if __name__ == "__main__":
-    print(len(getArrayOfTribracketsSizeN(4)))
-    # size4TribracketsArray = generateValidTribracketLatinCubes(4)
-
-    # print(getArrayOfVirtualNAlgebrasSizeThree())
-    # print(len(generateValidTribracketLatinCubes(2)))
-    # print(generateValidTribracketLatinCubes(3))
-
-    # backupArraySize4 = np.array(size4TribracketsArray, dtype=object)
-    # file = open("Backups/tribracketsSizeFour", "wb")
-    # np.save(file, backupArraySize4)
-    # file.close
-    # ----------------------------------------------------------------------
-    # READING FROM FILES
-    # ----------------------------------------------------------------------
-    # file = open("LatinCubes/latinCubesSize4", "rb")
-    # arrayOfCubesSize4 = np.load(file, allow_pickle=True)
-    # arrayOfCubesSize4 = arrayOfCubesSize4.tolist()
-    # print(len(arrayOfCubesSize4))
+    print("Do Tribracket functions here")

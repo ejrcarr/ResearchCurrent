@@ -205,6 +205,56 @@ def generateNAlgebraSizeThreePartials():
     return generatedNAlgebras
 
 
+def generateNAlgebraOrderNPartials(size):
+    listOfTribracketCubes = generateValidTribracketLatinCubes(size)
+    listOfLatinSquares = generateArrayOfPartialSquares(size)
+
+    generatedNAlgebras = []
+    for tribracket in listOfTribracketCubes:
+        for square in listOfLatinSquares:
+            if(isNAlgebraTest(tribracket, square)):
+                generatedNAlgebras.append([tribracket, square])
+
+    return generatedNAlgebras
+
+
+def generateVirtualNAlgebrasOrderNPartials(size):
+    listOfTribracketCubes = generateValidTribracketLatinCubes(size)
+    listOfLatinSquares = generateArrayOfPartialSquares(size)
+
+    generatedNAlgebras = []
+    for tribracket in listOfTribracketCubes:
+        for secondTribracket in listOfTribracketCubes:
+            for square in listOfLatinSquares:
+                if(isVirtualNAlgebraPartial(secondTribracket, square) and isNAlgebraTest(tribracket, square) and isVirtualTribracketTest(tribracket, secondTribracket)):
+                    generatedNAlgebras.append(
+                        [tribracket, secondTribracket, square])
+
+    return generatedNAlgebras
+
+
+def generateNAlgebraOrderNPartials(arrayOfTribrackets, arrayOfSquares):
+    generatedNAlgebras = []
+    for tribracket in arrayOfTribrackets:
+        for square in arrayOfSquares:
+            if(isNAlgebraTest(tribracket, square)):
+                generatedNAlgebras.append([tribracket, square])
+
+    return generatedNAlgebras
+
+
+def generateVirtualNAlgebrasOrderNPartials(arrayOfTribrackets, arrayOfSquares):
+    generatedNAlgebras = []
+    for tribracket in arrayOfTribrackets:
+        for secondTribracket in arrayOfTribrackets:
+            for square in arrayOfSquares:
+                if(isVirtualNAlgebraPartial(secondTribracket, square) and isNAlgebraTest(tribracket, square) and isVirtualTribracketTest(tribracket, secondTribracket)):
+                    generatedNAlgebras.append(
+                        [tribracket, secondTribracket, square])
+
+    return generatedNAlgebras
+
+
 # def generateNAlgebraSizeFourPartials():
 #     # -----------------------------------------------------------------------------------
 #     # SIZE 4
@@ -296,13 +346,9 @@ def generateNAlgebrasSizeFourPartials():
     # SIZE 4
     # -----------------------------------------------------------------------------------
     listOfTribracketCubesSizeFour = getTribracketsSizeFour()
-    print("Amount of tribrackets size four:",
-          len(listOfTribracketCubesSizeFour))
     file = open("Partials/partialSquaresSize4", "rb")
     partialSquaresSize4 = np.load(file, allow_pickle=True)
     listOfLatinSquaresSizeFour = partialSquaresSize4.tolist()
-    print("Amount of Latin Squares size four:",
-          len(listOfLatinSquaresSizeFour))
 
     generatedNAlgebras = []
     for tribracket in listOfTribracketCubesSizeFour:
@@ -317,7 +363,6 @@ def generateVirtualNAlgebraPartialsSizeFourGivenNAlgebras():
     file = open("Tribrackets/NAlgebrasSizeFour", "rb")
     arrayOfNAlgebrasSizeFour = np.load(file, allow_pickle=True)
     arrayOfNAlgebrasSizeFour = arrayOfNAlgebrasSizeFour.tolist()
-    print("length: ", len(arrayOfNAlgebrasSizeFour))
 
     validNAlgebraSquares = []
     validNAlgebraCubes = []
@@ -339,120 +384,43 @@ def generateVirtualNAlgebraPartialsSizeFourGivenNAlgebras():
     return generatedVirtualNAlgebras
 
 
+def getInstancesExcludingFullyUndefined(NAlgebraArray):
+    undefinedInstances = [
+        [[1000, 1000, 1000], [1000, 1000, 1000], [1000, 1000, 1000]],
+        [[1000, 1000, 1000, 1000], [1000, 1000, 1000, 1000], [
+            1000, 1000, 1000, 1000], [1000, 1000, 1000, 1000]],
+        ((1000, 1000, 1000), (1000, 1000, 1000), (1000, 1000, 1000)),
+        ((1000, 1000, 1000, 1000), (1000, 1000, 1000, 1000),
+         (1000, 1000, 1000, 1000), (1000, 1000, 1000, 1000))
+    ]
+    partiallyDefinedArray = []
+    for pair in NAlgebraArray:
+        if pair[-1] not in undefinedInstances:
+            partiallyDefinedArray.append(pair)
+    return partiallyDefinedArray
+
+
 if __name__ == "__main__":
-    partials = generateAllNAlgebraSizeThreePartials()
-    print(len(partials))
-    count = 0
-    for pair in partials:
-        if pair[-1] != [[1000, 1000, 1000], [1000, 1000, 1000], [1000, 1000, 1000]]:
-            count += 1
-            for val in pair:
-                print(val)
-
-    print("Amount of Virtual NAlgebras Size Three", len(partials))
-    print("Count of defined squares", count)
-
-    # file = open("Tribrackets/NAlgebrasSizeFour", "rb")
-    # arrayOfNAlgebrasSizeFour = np.load(file, allow_pickle=True)
-    # arrayOfNAlgebrasSizeFour = arrayOfNAlgebrasSizeFour.tolist()
-    # print("length: ", len(arrayOfNAlgebrasSizeFour))
-    # count = 0
-    # for pair in arrayOfNAlgebrasSizeFour:
-    #     if pair[-1] != [[1000, 1000, 1000, 1000], [1000, 1000, 1000, 1000], [1000, 1000, 1000, 1000], [1000, 1000, 1000, 1000]]:
-    #         count += 1
-    #         # for val in pair:
-    #         #     print(val)
-    # #         # print(pair)
-    # print("Amount of Virtual NAlgebras Size Four",
-    #       len(arrayOfNAlgebrasSizeFour))
-    # print("Count of defined squares", count)
-
-    # print(len(generateArrayOfPartialSquares(3)))
-    # virtualNAlgebraPartialsSizeFour = generateVirtualNAlgebraPartialsSizeFourGivenNAlgebras()
-    # print(virtualNAlgebraPartialsSizeFour)
-    # print("--------------------------------------")
-    # foundCubes = []
-    # count = 0
-    # countSame = 0
-    # for pair in virtualNAlgebraPartialsSizeFour:
-    #     if pair[-1] != [[1000, 1000, 1000, 1000], [1000, 1000, 1000, 1000], [1000, 1000, 1000, 1000], [1000, 1000, 1000, 1000]]:
-    #         if pair[0] == pair[1]:
-    #             countSame += 1
-    #         if pair[0] not in foundCubes:
-    #             foundCubes.append(pair[0])
-    #         if pair[1] not in foundCubes:
-    #             foundCubes.append(pair[1])
-    #         count += 1
-    #         print(pair[-1])
-    #         # for val in pair:
-    #         #     print(val)
-    # #         # print(pair)
-    # print("Amount of Virtual NAlgebras Size Four",
-    #       len(virtualNAlgebraPartialsSizeFour))
-    # print("Count of defined squares", count)
-    # print("Count of cubes that are the same", countSame)
-    # print("Unique cubes, ", len(foundCubes))
-
-    # virtualNAlgebraPartialsSizeFour = generateVirtualNAlgebrasSizeThreePartials()
-    # print("--------------------------------------")
-    # count = 0
-    # for pair in virtualNAlgebraPartialsSizeFour:
-    #     if pair[-1] != ((1000, 1000, 1000), (1000, 1000, 1000), (1000, 1000, 1000)):
-    #         count += 1
-    #         # print(pair[-1])
-    #         for val in pair:
-    #             print(val)
-    # #         # print(pair)
-    # print("Amount of Virtual NAlgebras Size Three",
-    #       len(virtualNAlgebraPartialsSizeFour))
-    # print("Count of defined squares", count)
-
-    print("------------------------")
-    partials = generateNAlgebraSizeThreePartials()
-    count = 0
-    for pair in partials:
-        if pair[-1] != ((1000, 1000, 1000), (1000, 1000, 1000), (1000, 1000, 1000)):
-            count += 1
-            for val in pair:
-                print(val)
-    #         # print(pair)
-    print("Amount of Virtual NAlgebras Size Three",
-          len(partials))
-    print("Count of defined squares", count)
-
+    print("Use functions here")
 
 """
 
-[[[1, 2, 3, 4], [2, 1, 4, 3], [4, 3, 1, 2], [3, 4, 2, 1]], 
+Example:
+
+[[1, 2, 3, 4], [2, 1, 4, 3], [4, 3, 1, 2], [3, 4, 2, 1]], 
 [[2, 1, 4, 3], [1, 2, 3, 4], [3, 4, 2, 1], [4, 3, 1, 2]], 
 [[3, 4, 2, 1], [4, 3, 1, 2], [1, 2, 3, 4], [2, 1, 4, 3]], 
-[[4, 3, 1, 2], [3, 4, 2, 1], [2, 1, 4, 3], [1, 2, 3, 4]]]
+[[4, 3, 1, 2], [3, 4, 2, 1], [2, 1, 4, 3], [1, 2, 3, 4]]
 
-[
-  [[1, 2, 3, 4], [2, 1, 4, 3], [4, 3, 1, 2], [3, 4, 2, 1]]
-  [[2, 1, 4, 3], [1, 2, 3, 4], [3, 4, 2, 1], [4, 3, 1, 2]], 
-  [[3, 4, 2, 1], [4, 3, 1, 2], [1, 2, 3, 4], [2, 1, 4, 3]], 
-  [[4, 3, 1, 2], [3, 4, 2, 1], [2, 1, 4, 3], [1, 2, 3, 4]]]
 
-[[_, 4, _, _], 
+[[1, 2, 3, 4], [2, 1, 4, 3], [4, 3, 1, 2], [3, 4, 2, 1]]
+[[2, 1, 4, 3], [1, 2, 3, 4], [3, 4, 2, 1], [4, 3, 1, 2]], 
+[[3, 4, 2, 1], [4, 3, 1, 2], [1, 2, 3, 4], [2, 1, 4, 3]], 
+[[4, 3, 1, 2], [3, 4, 2, 1], [2, 1, 4, 3], [1, 2, 3, 4]]
+
+[_, 4, _, _], 
 [3, _, _, _], 
 [_, _, _, 1], 
 [_, _, 2, _]]
 
 """
-# file = open("Tribrackets/NAlgebrasSizeFour", "rb")
-# arrayOfNAlgebrasSizeFour = np.load(file, allow_pickle=True)
-# arrayOfNAlgebrasSizeFour = arrayOfNAlgebrasSizeFour.tolist()
-# # print(len(arrayOfNAlgebrasSizeFour))
-# count = 0
-# for n in arrayOfNAlgebrasSizeFour:
-#     if n[-1] != [[1000, 1000, 1000, 1000], [1000, 1000, 1000, 1000], [1000, 1000, 1000, 1000], [1000, 1000, 1000, 1000]]:
-#         count += 1
-#         print(n)
-# print(count)
-# NAlgebrasSizeFour = generateNAlgebrasSizeFourPartials()
-
-# arrayOfNAlgebrasSizeFour = np.array(NAlgebrasSizeFour, dtype=object)
-# file = open("Tribrackets/NAlgebrasSizeFour", "wb")
-# np.save(file, arrayOfNAlgebrasSizeFour)
-# file.close

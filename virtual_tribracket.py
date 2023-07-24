@@ -114,7 +114,6 @@ The cube looks like this:       [1 2 3]   [2 3 1]   [3 1 2]     and square like 
 This class returns either True or False. True if the cube and square are compatable to be an Niebrzydowski Algebra.
 
 '''
-falseArray = [0, 0, 0, 0, 0]
 sumArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 freq = [0, 0, 0, 0, 0]
 
@@ -158,48 +157,7 @@ def isNAlgebraTest(cube, square):
 
                 # If fails any of the above axioms then function ends early and returns False
                 if FAILS_FIRST_SQUARE_BRACKET or FAILS_SECOND_SQUARE_BRACKET or FAILS_THIRD_SQUARE_BRACKET or FAILS_FOURTH_SQUARE_BRACKET or FAILS_FIFTH_SQUARE_BRACKET:
-                    if (FAILS_FIRST_SQUARE_BRACKET and not (FAILS_SECOND_SQUARE_BRACKET or FAILS_THIRD_SQUARE_BRACKET or FAILS_FOURTH_SQUARE_BRACKET or FAILS_FIFTH_SQUARE_BRACKET)):
-                        falseArray[0] += 1
-                    if (FAILS_SECOND_SQUARE_BRACKET and not (FAILS_FIRST_SQUARE_BRACKET or FAILS_THIRD_SQUARE_BRACKET or FAILS_FOURTH_SQUARE_BRACKET or FAILS_FIFTH_SQUARE_BRACKET)):
-                        falseArray[1] += 1
-                    if (FAILS_THIRD_SQUARE_BRACKET and not (FAILS_SECOND_SQUARE_BRACKET or FAILS_FIRST_SQUARE_BRACKET or FAILS_FOURTH_SQUARE_BRACKET or FAILS_FIFTH_SQUARE_BRACKET)):
-                        falseArray[2] += 1
-                    if (FAILS_FOURTH_SQUARE_BRACKET and not (FAILS_SECOND_SQUARE_BRACKET or FAILS_THIRD_SQUARE_BRACKET or FAILS_FIRST_SQUARE_BRACKET or FAILS_FIFTH_SQUARE_BRACKET)):
-                        falseArray[3] += 1
-                    if (FAILS_FIFTH_SQUARE_BRACKET and not (FAILS_SECOND_SQUARE_BRACKET or FAILS_THIRD_SQUARE_BRACKET or FAILS_FOURTH_SQUARE_BRACKET or FAILS_FIRST_SQUARE_BRACKET)):
-                        falseArray[4] += 1
-
-                    # if FAILS_THIRD_SQUARE_BRACKET:
-                    #     # if (FAILS_FIRST_SQUARE_BRACKET and not (FAILS_SECOND_SQUARE_BRACKET or FAILS_THIRD_SQUARE_BRACKET or FAILS_FOURTH_SQUARE_BRACKET or FAILS_FIFTH_SQUARE_BRACKET)):
-                    #     #     falseArray[0] += 1
-                    #     # if (FAILS_SECOND_SQUARE_BRACKET and not (FAILS_FIRST_SQUARE_BRACKET or FAILS_THIRD_SQUARE_BRACKET or FAILS_FOURTH_SQUARE_BRACKET or FAILS_FIFTH_SQUARE_BRACKET)):
-                    #     #     falseArray[1] += 1
-                    #     # if (FAILS_THIRD_SQUARE_BRACKET and not (FAILS_SECOND_SQUARE_BRACKET or FAILS_FIRST_SQUARE_BRACKET or FAILS_FOURTH_SQUARE_BRACKET or FAILS_FIFTH_SQUARE_BRACKET)):
-                    #     #     falseArray[2] += 1
-                    #     # if (FAILS_FOURTH_SQUARE_BRACKET and not (FAILS_SECOND_SQUARE_BRACKET or FAILS_THIRD_SQUARE_BRACKET or FAILS_FIRST_SQUARE_BRACKET or FAILS_FIFTH_SQUARE_BRACKET)):
-                    #     #     falseArray[3] += 1
-                    #     # if (FAILS_FIFTH_SQUARE_BRACKET and not (FAILS_SECOND_SQUARE_BRACKET or FAILS_THIRD_SQUARE_BRACKET or FAILS_FOURTH_SQUARE_BRACKET or FAILS_FIRST_SQUARE_BRACKET)):
-                    #     #     falseArray[4] += 1
-                    #     if FAILS_FIRST_SQUARE_BRACKET:
-                    #         falseArray[0] += 1
-                    #     if FAILS_SECOND_SQUARE_BRACKET:
-                    #         falseArray[1] += 1
-                    #     if FAILS_THIRD_SQUARE_BRACKET:
-                    #         falseArray[2] += 1
-                    #     if FAILS_FOURTH_SQUARE_BRACKET:
-                    #         falseArray[3] += 1
-                    #     if FAILS_FIFTH_SQUARE_BRACKET:
-                    #         falseArray[4] += 1
-
-                    # print("1.", FAILS_FIRST_SQUARE_BRACKET)
-                    # print("2.", FAILS_SECOND_SQUARE_BRACKET)
-                    # print("3.", FAILS_THIRD_SQUARE_BRACKET)
-                    # print("4.", FAILS_FOURTH_SQUARE_BRACKET)
-                    # print("5.", FAILS_FIFTH_SQUARE_BRACKET)
                     return False
-
-                # if FAILS_FIRST_SQUARE_BRACKET or FAILS_SECOND_SQUARE_BRACKET or FAILS_FOURTH_SQUARE_BRACKET or FAILS_FIFTH_SQUARE_BRACKET:
-                #     return False
 
     # If for-loops end then that means they are compatable.
     return True
@@ -408,33 +366,34 @@ def generateVirtualNAlgebrasSizeThree():
     # -----------------------------------------------------------------------------------
     # SIZE 3
     # -----------------------------------------------------------------------------------
-    #  listOfTribracketCubesSizeThree = generateValidTribracketLatinCubes(3)
-    #  listOfLatinSquaresSizeThree = generateArrayOfLatinSquares(3)
+    listOfTribracketCubesSizeThree = generateValidTribracketLatinCubes(3)
+    listOfLatinSquaresSizeThree = generateArrayOfLatinSquares(3)
 
-    #  generatedNAlgebras = []
-    #  for tribracket in listOfTribracketCubesSizeThree:
-    #     for secondTribracket in listOfTribracketCubesSizeThree:
-    #         for square in listOfLatinSquaresSizeThree:
-    #             if(isValidVirtualNAlgebraTribracket(tribracket, secondTribracket, square)):
-    #                 generatedNAlgebras.append([tribracket, secondTribracket, square])
+    generatedNAlgebras = []
+    for tribracket in listOfTribracketCubesSizeThree:
+        for secondTribracket in listOfTribracketCubesSizeThree:
+            for square in listOfLatinSquaresSizeThree:
+                if(isValidVirtualNAlgebraTribracket(tribracket, secondTribracket, square)):
+                    generatedNAlgebras.append(
+                        [tribracket, secondTribracket, square])
 
     # -----------------------------------------------------------------------------------
     # SIZE 4
     # -----------------------------------------------------------------------------------
-    file = open("Tribrackets/tribracketCubesSizeFour", "rb")
-    arrayOfTribracketsSize4 = np.load(file, allow_pickle=True)
-    arrayOfTribracketsSize4 = arrayOfTribracketsSize4.tolist()
+    # file = open("Tribrackets/tribracketCubesSizeFour", "rb")
+    # arrayOfTribracketsSize4 = np.load(file, allow_pickle=True)
+    # arrayOfTribracketsSize4 = arrayOfTribracketsSize4.tolist()
 
-    listOfLatinSquaresSizeFour = generateArrayOfLatinSquares(4)
+    # listOfLatinSquaresSizeFour = generateArrayOfLatinSquares(4)
 
-    generatedNAlgebras = []
-    for tribracket in arrayOfTribracketsSize4:
-        for secondTribracket in arrayOfTribracketsSize4:
-            for square in listOfLatinSquaresSizeFour:
-                print(arrayOfTribracketsSize4.index(tribracket))
-                if(isValidVirtualNAlgebraTribracket(tribracket, secondTribracket, square)):
-                    generatedNAlgebras.append(
-                        [tribracket, secondTribracket, square])
+    # generatedNAlgebras = []
+    # for tribracket in arrayOfTribracketsSize4:
+    #     for secondTribracket in arrayOfTribracketsSize4:
+    #         for square in listOfLatinSquaresSizeFour:
+    #             print(arrayOfTribracketsSize4.index(tribracket))
+    #             if(isValidVirtualNAlgebraTribracket(tribracket, secondTribracket, square)):
+    #                 generatedNAlgebras.append(
+    #                     [tribracket, secondTribracket, square])
 
     return generatedNAlgebras
 
@@ -494,9 +453,7 @@ def generateNAlgebraSizeThree():
     # SIZE 3
     # -----------------------------------------------------------------------------------
     listOfTribracketCubesSizeThree = generateValidTribracketLatinCubes(3)
-    #  print(len(listOfTribracketCubesSizeThree))
     listOfLatinSquaresSizeThree = generateArrayOfLatinSquares(3)
-    #  print(len(listOfLatinSquaresSizeThree))
 
     generatedNAlgebras = []
     for tribracket in listOfTribracketCubesSizeThree:
@@ -523,35 +480,58 @@ def generateNAlgebraSizeThree():
     return generatedNAlgebras
 
 
+def generateNAlgebraOrderN(size):
+    listOfTribracketCubes = generateValidTribracketLatinCubes(size)
+    listOfLatinSquares = generateArrayOfLatinSquares(size)
+
+    generatedNAlgebras = []
+    for tribracket in listOfTribracketCubes:
+        for square in listOfLatinSquares:
+            if(isNAlgebraTest(tribracket, square)):
+                generatedNAlgebras.append([tribracket, square])
+
+    return generatedNAlgebras
+
+
+def generateVirtualNAlgebrasOrderN(size):
+    listOfTribracketCubes = generateValidTribracketLatinCubes(size)
+    listOfLatinSquares = generateArrayOfLatinSquares(size)
+
+    generatedNAlgebras = []
+    for tribracket in listOfTribracketCubes:
+        for secondTribracket in listOfTribracketCubes:
+            for square in listOfLatinSquares:
+                if(isValidVirtualNAlgebraTribracket(tribracket, secondTribracket, square)):
+                    generatedNAlgebras.append(
+                        [tribracket, secondTribracket, square])
+
+    return generatedNAlgebras
+
+
+def generateNAlgebraOrderN(arrayOfTribracketCubes, arrayOfLatinSquares):
+    generatedNAlgebras = []
+    for tribracket in arrayOfTribracketCubes:
+        for square in arrayOfLatinSquares:
+            if(isNAlgebraTest(tribracket, square)):
+                generatedNAlgebras.append([tribracket, square])
+
+    return generatedNAlgebras
+
+
+def generateVirtualNAlgebrasOrderN(arrayOfTribracketCubes, arrayOfLatinSquares):
+    generatedNAlgebras = []
+    for tribracket in arrayOfTribracketCubes:
+        for secondTribracket in arrayOfTribracketCubes:
+            for square in arrayOfLatinSquares:
+                if(isValidVirtualNAlgebraTribracket(tribracket, secondTribracket, square)):
+                    generatedNAlgebras.append(
+                        [tribracket, secondTribracket, square])
+
+    return generatedNAlgebras
+
+
 if __name__ == "__main__":
-    # virtualNAlgebras = generateVirtualNAlgebrasSizeThree()
-
-    # THIS ---
-    # NAlgebras = generateNAlgebraSizeThree()
-
-    print(len(generateVirtualTribracketSizeThree()))
-
-    # virtualTribrackets = generateVirtualTribracketSizeThree()
-    # print(len(virtualTribrackets))
-    # tribrackets = generateValidTribracketLatinCubes(3)
-
-    # for pair in virtualNAlgebras:
-    #     for thing in pair:
-    #         print(thing)
-    #     print()
-
-    # print(len(virtualNAlgebras))
-
-    # for pair in NAlgebras:
-    #     for thing in pair:
-    #         print(thing)
-    #     print()
-
-    # THESE -----
-    # print(len(NAlgebras))
-    # print(freq)
-    # print(sumArray)
-    # print(falseArray)
+    print("Use functions here")
 
     # -------------------------------------------------------------
 
@@ -568,74 +548,6 @@ if __name__ == "__main__":
     # AMOUNT OF TRIBRACKETS SIZE FOUR = 168
     # AMOUNT OF N-ALGEBRAS SIZE FOUR = 0   :(
     # AMOUNT OF VIRTUAL N-ALGEBRAS SIZE FOUR = ? probably 0
-
-    # -------------------------------------------------------------
-
-    # for pair in virtualNAlgebras:
-    #     for thing in pair:
-    #         print(thing)
-    #     print()
-
-    # for pair in virtualNAlgebras:
-    #     for thing in pair:
-    #         print(thing)
-    #     print()
-
-    # -----------------------------------------------------------------------------------
-    # Writing to files
-    # -----------------------------------------------------------------------------------
-
-    # arrayOfVirtualNAlgebrasSizeThree = np.array(tempVar, dtype=object)
-    # file = open("Tribrackets/VirtualNAlgebrasSizeThree", "wb")
-    # np.save(file, arrayOfVirtualNAlgebrasSizeThree)
-    # file.close
-
-    # arrayOfNAlgebrasSizeThree = np.array(tempVar, dtype=object)
-    # file = open("Tribrackets/NAlgebrasSizeThree", "wb")
-    # np.save(file, arrayOfNAlgebrasSizeThree)
-    # file.close
-
-    # arrayOfVirtualTribracketsSizeThree = np.array(tempVar, dtype=object)
-    # file = open("Tribrackets/VirtualTribracketsSizeThree", "wb")
-    # np.save(file, arrayOfVirtualTribracketsSizeThree)
-    # file.close
-
-    # arrayOfTribracketsSizeThree = np.array(tempVar, dtype=object)
-    # file = open("Tribrackets/TribracketsSizeThree", "wb")
-    # np.save(file, arrayOfTribracketsSizeThree)
-    # file.close
-
-    # -----------------------------------------------------------------------------------
-    # Reading in files
-    # -----------------------------------------------------------------------------------
-
-    # file = open("Tribrackets/VirtualNAlgebrasSizeThree", "rb")
-    # arrayOfVirtualNAlgebrasSizeThree = np.load(file, allow_pickle=True)
-    # arrayOfVirtualNAlgebrasSizeThree = arrayOfVirtualNAlgebrasSizeThree.tolist()
-
-    # file = open("Tribrackets/NAlgebrasSizeThree", "rb")
-    # arrayOfNAlgebrasSizeThree = np.load(file, allow_pickle=True)
-    # arrayOfNAlgebrasSizeThree = arrayOfNAlgebrasSizeThree.tolist()
-
-    # file = open("Tribrackets/VirtualTribracketsSizeThree", "rb")
-    # arrayOfVirtualTribracketsSizeThree = np.load(file, allow_pickle=True)
-    # arrayOfVirtualTribracketsSizeThree = arrayOfVirtualTribracketsSizeThree.tolist()
-
-    # file = open("Tribrackets/TribracketsSizeThree", "rb")
-    # arrayOfTribracketsSizeThree = np.load(file, allow_pickle=True)
-    # arrayOfTribracketsSizeThree = arrayOfTribracketsSizeThree.tolist()
-    # print(len(arrayOfTribracketsSizeThree))
-
-    # -----------------------------------------------------------------------------------
-
-    # print(len(generateValidTribracketLatinCubes(3)))
-    # print(len(generateNAlgebrasSizeThree()))
-
-    # for pair in arrayOfVirtualTribracketsSizeThree:
-    #     for thing in pair:
-    #         print(thing)
-    #         # print(np.array(thing))
-    #     print()
 
     """
 
@@ -661,34 +573,3 @@ if __name__ == "__main__":
             [2 1 3]
 
     """
-
-    # if FAILS_FIRST_SQUARE_BRACKET:
-    #     freq[0] += 1
-    # if FAILS_SECOND_SQUARE_BRACKET:
-    #     freq[1] += 1
-    # if FAILS_THIRD_SQUARE_BRACKET:
-    #     freq[2] += 1
-    # if FAILS_FOURTH_SQUARE_BRACKET:
-    #     freq[3] += 1
-    # if FAILS_FIFTH_SQUARE_BRACKET:
-    #     freq[4] += 1
-    # if FAILS_THIRD_SQUARE_BRACKET and FAILS_FIRST_SQUARE_BRACKET:
-    #     sum[0] += 1
-    # if FAILS_FIRST_SQUARE_BRACKET and FAILS_SECOND_SQUARE_BRACKET:
-    #     sum[1] += 1
-    # if FAILS_FIRST_SQUARE_BRACKET and FAILS_FOURTH_SQUARE_BRACKET:
-    #     sum[2] += 1
-    # if FAILS_FIRST_SQUARE_BRACKET and FAILS_FIFTH_SQUARE_BRACKET:
-    #     sum[3] += 1
-    # if FAILS_SECOND_SQUARE_BRACKET and FAILS_THIRD_SQUARE_BRACKET:
-    #     sum[4] += 1
-    # if FAILS_SECOND_SQUARE_BRACKET and FAILS_FOURTH_SQUARE_BRACKET:
-    #     sum[5] += 1
-    # if FAILS_SECOND_SQUARE_BRACKET and FAILS_FIFTH_SQUARE_BRACKET:
-    #     sum[6] += 1
-    # if FAILS_THIRD_SQUARE_BRACKET and FAILS_FOURTH_SQUARE_BRACKET:
-    #     sum[7] += 1
-    # if FAILS_THIRD_SQUARE_BRACKET and FAILS_FIFTH_SQUARE_BRACKET:
-    #     sum[8] += 1
-    # if FAILS_FOURTH_SQUARE_BRACKET and FAILS_FIFTH_SQUARE_BRACKET:
-    #     sum[9] += 1
