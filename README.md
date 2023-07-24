@@ -19,3 +19,13 @@ pip install numpy
 ```
 
 ## Usage
+In `main.py` there is a function to create a text file will all information of order N. The information will display how many variations/pairs exist of each type. 
+```
+def writeInformationOfOrderNToFile(size, filename):
+```
+An example call would look like: 
+```
+if __name__ == "__main__":
+    writeInformationOfOrderNToFile(3, "OrderThree")
+```
+This would output a text file: `OrderThree.txt` in the root directory of the project. There you can open the file and look at the generated information. Bear in mind that this may take a long period of time since the number of each generated pairings are very large.
